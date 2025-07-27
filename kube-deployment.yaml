@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: casemessaging-ui-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: casemessaging-react-ui
+  template:
+    metadata:
+      labels:
+        app: casemessaging-react-ui
+    spec:
+      containers:
+      - name: payment-ui-container
+        image: blitznihar/app-casemessaging-react-ui:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5176
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: casemessaging-react-ui-service
+spec:
+  type: NodePort
+  selector:
+    app: casemessaging-react-ui
+  ports:
+  - port: 5175
+    targetPort: 5175
+    nodePort: 30175
