@@ -1,31 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import "./App.css";
+import Timer from "./components/Timer";
+import PersonDetails from "./components/PersonDetails.jsx";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+     <div className="container" data-bs-theme="dark">
+      <Tabs defaultActiveKey="timer" id="uncontrolled-tab-example" className="mb-3">
+      <Tab eventKey="timer" title="Timer">
+      <div className="container" data-bs-theme="dark">
+        <Timer />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+     
+      </Tab>
+      <Tab eventKey="personDetails" title="Person Details">
+         <div className="container" data-bs-theme="dark">
+        <div className="card shadow">
+          <div className="card-header bg-primary text-white">
+            Person Details
+          </div>
+          <div>
+            <PersonDetails />
+          </div>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </Tab>
+     </Tabs>
+    </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
